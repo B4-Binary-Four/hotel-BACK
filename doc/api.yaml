@@ -4,6 +4,380 @@ info:
   description: Title
   version: 1.0.0
 servers:
-  - url: 'https'
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/HEIMAHEFA/hotel/1.0.0
 paths:
-  
+  /:
+    get:
+      summary: baseLink to authentify user
+      responses:
+        200:
+          description: you're connected
+          content:
+            text/plain:
+              example: you're connected
+  /ping:
+    get:
+      summary: checks server status
+      tags:
+        - Security
+      responses:
+        200:
+          description: pong
+          content:
+            text/plain:
+              example: pong
+  /roomCategories:
+    get:
+      tags:
+        - Room Categories
+      summary: get all roomCategories
+      responses:
+        200:
+          description: roomCategory list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RoomCategory'
+    post:
+      tags:
+        - Room Categories
+      summary: create roomCategory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRoomCategory'
+      responses:
+        200:
+          description: the created roomCategory
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoomCategory'
+  /roomCategories/{id}:
+    get:
+      tags:
+        - Room Categories
+      summary: get specific roomCategory by its id
+      parameters:
+        - name: id
+          schema:
+            type: integer
+          in: path
+          required: true
+      responses:
+        200:
+          description: roomCategory
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoomCategory'
+    put:
+      tags:
+        - Room Categories
+      summary: update specific roomCategory by referring to its id
+      parameters:
+        - name: id
+          schema:
+            type: integer
+          in: path
+          required: true
+      requestBody:
+        required: true
+        description: roomCategory with updated details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRoomCategory'
+      responses:
+        200:
+          description: updated roomCategory
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoomCategory'
+  /rooms:
+    get:
+      tags:
+        - Rooms
+      summary: get all rooms
+      parameters:
+        - name: page
+          schema:
+            $ref: '#/components/schemas/Page'
+          in: query
+          required: true
+        - name: pageSize
+          schema:
+            $ref: '#/components/schemas/PageSize'
+          in: query
+          required: true
+      responses:
+        200:
+          description: list of room
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Room'
+
+    post:
+      tags:
+        - Rooms
+      summary: create room
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRoom'
+      responses:
+        200:
+          description: the created room
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Room'
+  /rooms/{id}:
+    get:
+      tags:
+        - Rooms
+      summary: get specific room by its id
+      parameters:
+        - name: id
+          schema:
+            type: integer
+          in: path
+          required: true
+      responses:
+        200:
+          description: room
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Room'
+    put:
+      tags:
+        - Rooms
+      summary: update specific room by referring to its id
+      parameters:
+        - name: id
+          schema:
+            type: integer
+          in: path
+          required: true
+      requestBody:
+        required: true
+        description: room with updated details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRoom'
+      responses:
+        200:
+          description: updated room
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Room'
+  /bookings:
+    get:
+      tags:
+        - Reservations | Bookings
+      summary: get all reservations
+      parameters:
+        - name: page
+          schema:
+            $ref: '#/components/schemas/Page'
+          in: query
+          required: true
+        - name: pageSize
+          schema:
+            $ref: '#/components/schemas/PageSize'
+          in: query
+          required: true
+        - name: roomCategoryName
+          in: query
+          schema:
+            $ref: '#/components/schemas/RoomCategoryEnum'
+      responses:
+        200:
+          description: list of reservations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Booking'
+    post:
+      tags:
+        - Reservations | Bookings
+      summary: create reservation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBooking'
+      responses:
+        200:
+          description: the created reservation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+  /bookings/{id}:
+    get:
+      tags:
+        - Reservations | Bookings
+      summary: get specific reservation by its id
+      parameters:
+        - name: id
+          schema:
+            type: integer
+          in: path
+          required: true
+      responses:
+        200:
+          description: reservation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+    put:
+      tags:
+        - Reservations | Bookings
+      summary: update specific reservation by referring to its id
+      parameters:
+        - name: id
+          schema:
+            type: integer
+          in: path
+          required: true
+      requestBody:
+        required: true
+        description: booking with updated details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBooking'
+      responses:
+        200:
+          description: updated reservation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+
+components:
+  schemas:
+    CreateRoomCategory:
+      type: object
+      properties:
+        categoryName:
+          $ref: '#/components/schemas/RoomCategoryEnum'
+        price:
+          $ref: '#/components/schemas/Price'
+
+    RoomCategory:
+      type: object
+      properties:
+        categoryName:
+          $ref: '#/components/schemas/RoomCategoryEnum'
+        price:
+          $ref: '#/components/schemas/Price'
+        id:
+          type: integer
+          example: 1
+
+    RoomCategoryEnum:
+      type: string
+      enum:
+        - double
+        - family
+        - suite
+      default: double
+      example: double
+
+    CreateRoom:
+      type: object
+      properties:
+        description:
+          type: string
+          example: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        categoryName:
+          $ref: '#/components/schemas/RoomCategoryEnum'
+
+    Room:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        description:
+          type: string
+          example: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        status:
+          $ref: '#/components/schemas/RoomStatus'
+        categoryName:
+          $ref: '#/components/schemas/RoomCategoryEnum'
+        price:
+          $ref: '#/components/schemas/Price'
+        bookingCount:
+          type: integer
+          example: 0
+
+    RoomStatus:
+      type: string
+      enum:
+        - AVAILABLE
+        - TAKEN
+      default: AVAILABLE
+
+    Price:
+      type: number
+      format: double
+
+    CreateBooking:
+      type: object
+      properties:
+        clientName:
+          type: string
+          example: Dinasoa
+        phoneNumber:
+          type: string
+          example: 034 64 297 51
+        bookingDate:
+          type: string
+          format: date
+        roomCategoryName:
+          $ref: '#/components/schemas/RoomCategoryEnum'
+        roomId:
+          type: integer
+          example: 1
+
+    Booking:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/CreateBooking'
+      properties:
+        id:
+          type: integer
+          example: 1
+        creationDate:
+          type: string
+          format: date
+
+    Page:
+      type: number
+      minimum: 1
+
+    PageSize:
+      type: number
+      minimum: 1
+      maximum: 500
