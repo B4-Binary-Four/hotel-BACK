@@ -4,6 +4,7 @@ import com.codingpals.hotel.model.Booking;
 import com.codingpals.hotel.model.BoundedPageSize;
 import com.codingpals.hotel.model.PageFromOne;
 import com.codingpals.hotel.model.Room;
+import com.codingpals.hotel.model.RoomCategory;
 import com.codingpals.hotel.model.validator.BookingValidator;
 import com.codingpals.hotel.repository.BookingRepository;
 import java.util.List;
@@ -44,8 +45,12 @@ public class BookingService {
     throw new RuntimeException("Booking not found");
   }
 
-  public int getBookingCount(int roomId) {
-    return bookingRepository.getBookingCount(roomId);
+  public int getRoomBookingCount(Room room) {
+    return bookingRepository.getRoomBookingCount(room.getId());
+  }
+
+  public int getCategoryBookingCount(RoomCategory category) {
+    return bookingRepository.getCategoryBookingCount(category.getId());
   }
 
   @Transactional
@@ -56,6 +61,7 @@ public class BookingService {
       toUpdate.getRoom().setStatus(Room.Status.AVAILABLE);
       booking.getRoom().setStatus(Room.Status.TAKEN);
     }
+    RoomCategory roomCategory = booking.getRoom().getCategory();
     toUpdate.setBookingDate(booking.getBookingDate());
     toUpdate.setPhoneNumber(booking.getPhoneNumber());
     toUpdate.setRoom(booking.getRoom());
