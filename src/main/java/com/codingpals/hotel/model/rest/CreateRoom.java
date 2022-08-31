@@ -12,6 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateRoom {
+  private String roomName;
   private String description;
   private String categoryName;
 }

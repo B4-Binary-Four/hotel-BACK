@@ -308,20 +308,19 @@ components:
           example: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
         categoryName:
           $ref: '#/components/schemas/RoomCategoryEnum'
-
+        roomName:
+          type: string
+          example: room ABC
     Room:
       type: object
+      allOf:
+        - $ref: '#/components/schemas/CreateRoom'
       properties:
         id:
           type: integer
           example: 1
-        description:
-          type: string
-          example: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
         status:
           $ref: '#/components/schemas/RoomStatus'
-        categoryName:
-          $ref: '#/components/schemas/RoomCategoryEnum'
         price:
           $ref: '#/components/schemas/Price'
         bookingCount:

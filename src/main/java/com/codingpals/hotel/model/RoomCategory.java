@@ -1,5 +1,6 @@
 package com.codingpals.hotel.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,7 +24,7 @@ public class RoomCategory {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
-
+  @Column(unique = true)
   private String categoryName;
 
   private double price;

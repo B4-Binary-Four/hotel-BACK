@@ -12,9 +12,11 @@ import org.springframework.stereotype.Component;
 public class RoomMapper {
   private final RoomCategoryService roomCategoryService;
   private final BookingService bookingService;
+
   public com.codingpals.hotel.model.rest.Room toRest(Room room) {
     return com.codingpals.hotel.model.rest.Room.builder()
         .id(room.getId())
+        .roomName(room.getName())
         .categoryName(room.getCategory().getCategoryName())
         .price(room.getCategory().getPrice())
         .bookingCount(bookingService.getRoomBookingCount(room))
@@ -25,6 +27,7 @@ public class RoomMapper {
   public Room toDomain(com.codingpals.hotel.model.rest.Room room) {
     return Room.builder()
         .id(room.getId())
+        .name(room.getRoomName())
         .category(roomCategoryService.getRoomCategoryByName(room.getCategoryName()))
         .status(room.getStatus())
         .build();
@@ -32,6 +35,7 @@ public class RoomMapper {
 
   public Room toDomain(CreateRoom toCreate) {
     return Room.builder()
+        .name(toCreate.getRoomName())
         .category(roomCategoryService.getRoomCategoryByName(toCreate.getCategoryName()))
         .status(Room.Status.AVAILABLE)
         .build();

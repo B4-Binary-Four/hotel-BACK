@@ -1,5 +1,6 @@
 package com.codingpals.hotel.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -26,6 +27,8 @@ public class Room {
   private int id;
   @Enumerated(EnumType.STRING)
   private Status status;
+  @Column(unique = true)
+  private String name;
   @ManyToOne
   private RoomCategory category;
   @Transient

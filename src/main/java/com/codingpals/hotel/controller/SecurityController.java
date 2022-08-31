@@ -11,9 +11,4 @@ public class SecurityController {
   public String ping() {
     return "pong";
   }
-
-  @GetMapping("/")
-  public String connect() {
-    return "you're connected !";
-  }
 }
