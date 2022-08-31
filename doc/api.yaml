@@ -298,6 +298,9 @@ components:
         id:
           type: integer
           example: 1
+        bookingCount:
+          type: integer
+          example: 0
 
     RoomCategoryEnum:
       type: string
