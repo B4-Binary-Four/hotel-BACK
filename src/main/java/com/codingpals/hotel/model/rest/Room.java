@@ -14,6 +14,7 @@ import lombok.Setter;
 public class Room {
   private int id;
   private String roomName;
+  private String description;
   private com.codingpals.hotel.model.Room.Status status;
   private String categoryName;
   private double price;

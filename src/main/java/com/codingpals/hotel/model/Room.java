@@ -29,6 +29,7 @@ public class Room {
   private Status status;
   @Column(unique = true)
   private String name;
+  private String description;
   @ManyToOne
   private RoomCategory category;
   @Transient

@@ -17,6 +17,7 @@ public class RoomMapper {
     return com.codingpals.hotel.model.rest.Room.builder()
         .id(room.getId())
         .roomName(room.getName())
+        .description(room.getDescription())
         .categoryName(room.getCategory().getCategoryName())
         .price(room.getCategory().getPrice())
         .bookingCount(bookingService.getRoomBookingCount(room))
@@ -27,6 +28,7 @@ public class RoomMapper {
   public Room toDomain(com.codingpals.hotel.model.rest.Room room) {
     return Room.builder()
         .id(room.getId())
+        .description(room.getDescription())
         .name(room.getRoomName())
         .category(roomCategoryService.getRoomCategoryByName(room.getCategoryName()))
         .status(room.getStatus())
@@ -36,6 +38,7 @@ public class RoomMapper {
   public Room toDomain(CreateRoom toCreate) {
     return Room.builder()
         .name(toCreate.getRoomName())
+        .description(toCreate.getDescription())
         .category(roomCategoryService.getRoomCategoryByName(toCreate.getCategoryName()))
         .status(Room.Status.AVAILABLE)
         .build();
