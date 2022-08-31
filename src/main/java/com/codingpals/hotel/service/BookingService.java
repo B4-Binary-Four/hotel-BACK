@@ -55,7 +55,7 @@ public class BookingService {
 
   @Transactional
   public Booking updateBooking(int id, Booking booking) {
-    bookingValidator.accept(booking);
+    bookingValidator.accept(booking, id);
     Booking toUpdate = this.getBookingById(id);
     if (toUpdate.getRoom().getId() != booking.getRoom().getId()) {
       toUpdate.getRoom().setStatus(Room.Status.AVAILABLE);

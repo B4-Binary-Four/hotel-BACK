@@ -17,6 +17,5 @@ public class CreateBooking {
   private String phoneNumber;
   private Instant bookingDate;
   private Instant bookingDateEnd;
-  private String roomCategoryName;
   private int roomId;
 }

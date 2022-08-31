@@ -13,6 +13,12 @@ public class BookingValidator {
     }
   }
 
+  public void accept(Booking booking, int id) {
+    if (!this.isValid(booking,id)) {
+      throw new RuntimeException("This Room is already occupied");
+    }
+  }
+
   public void accept(List<Booking> bookingList) {
     bookingList.forEach(this::accept);
   }
@@ -21,9 +27,14 @@ public class BookingValidator {
     return hasAvailableRoom(booking) && hasValidEndDate(booking);
   }
 
+  private boolean isValid(Booking booking, int id) {
+    return hasAvailableRoom(booking) && hasValidEndDate(booking) && booking.getId() == id;
+  }
+
   private boolean hasAvailableRoom(Booking booking) {
     return booking.getRoom().getStatus() == Room.Status.AVAILABLE;
   }
+
 
   private boolean hasValidEndDate(Booking booking) {
     return booking.getBookingDate().isBefore(booking.getBookingDateEnd());
