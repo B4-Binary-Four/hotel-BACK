@@ -42,6 +42,7 @@ public class RoomService {
 
   @Transactional
   public Room updateRoom(int id, Room room) {
+    roomValidator.accept(room);
     Room updatedRoom = this.getById(id);
     updatedRoom.setStatus(room.getStatus());
     updatedRoom.setCategory(room.getCategory());
