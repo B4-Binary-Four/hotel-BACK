@@ -10,6 +10,8 @@ servers:
 paths:
   /:
     get:
+      tags:
+        - Security
       summary: baseLink to authentify user
       responses:
         200:

@@ -11,7 +11,10 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateRoom {
-  private String description;
+public class Room {
+  private int id;
+  private com.codingpals.hotel.model.Room.Status status;
   private String categoryName;
+  private double price;
+  private int bookingCount;
 }
