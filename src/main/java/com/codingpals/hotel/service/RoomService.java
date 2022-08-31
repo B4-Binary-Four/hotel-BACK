@@ -45,6 +45,8 @@ public class RoomService {
   public Room updateRoom(int id, Room room) {
     roomValidator.accept(room);
     Room updatedRoom = this.getById(id);
+    updatedRoom.setDescription(room.getDescription());
+    updatedRoom.setName(room.getName());
     updatedRoom.setStatus(room.getStatus());
     updatedRoom.setCategory(room.getCategory());
     return updatedRoom;
