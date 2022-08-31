@@ -1,11 +1,15 @@
 package com.codingpals.hotel.model;
 
-import lombok.*;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,11 +19,11 @@ import javax.persistence.Id;
 @Entity
 @Builder
 public class RoomCategory {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id ;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int id;
 
-    private String categoryName ;
+  private String categoryName;
 
-    private double price ;
+  private double price;
 }
