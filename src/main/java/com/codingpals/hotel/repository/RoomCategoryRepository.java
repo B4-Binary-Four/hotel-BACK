@@ -1,4 +1,7 @@
 package com.codingpals.hotel.repository;
 
-public interface RoomCategoryRepository {
+import com.codingpals.hotel.model.RoomCategory;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface RoomCategoryRepository extends JpaRepository<RoomCategory, Integer> {
 }
