@@ -1,6 +1,10 @@
 package com.codingpals.hotel.model.rest;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -10,9 +14,9 @@ import lombok.*;
 
 public class RoomCategory {
 
-    private int id ;
+  private int id;
 
-    private String categoryName ;
+  private String categoryName;
 
-    private double price ;
+  private double price;
 }
