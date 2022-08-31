@@ -17,7 +17,7 @@ public class RoomMapper {
         .id(room.getId())
         .categoryName(room.getCategory().getCategoryName())
         .price(room.getCategory().getPrice())
-        .bookingCount(bookingService.getBookingCount(room.getId()))
+        .bookingCount(bookingService.getRoomBookingCount(room))
         .status(room.getStatus())
         .build();
   }

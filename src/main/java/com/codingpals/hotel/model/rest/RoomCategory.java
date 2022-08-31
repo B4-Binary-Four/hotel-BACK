@@ -19,4 +19,5 @@ public class RoomCategory {
   private String categoryName;
 
   private double price;
+  private int bookingCount;
 }
