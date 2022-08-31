@@ -22,7 +22,8 @@ public class RoomService {
 
   public List<Room> getAll(PageFromOne page, BoundedPageSize pageSize) {
     Pageable pageable =
-        PageRequest.of(page.getValue() - 1, pageSize.getValue(), Sort.by(Sort.Direction.ASC,"status"));
+        PageRequest.of(page.getValue() - 1, pageSize.getValue(),
+            Sort.by(Sort.Direction.ASC, "status"));
     return roomRepository.findAll(pageable).getContent();
   }
 

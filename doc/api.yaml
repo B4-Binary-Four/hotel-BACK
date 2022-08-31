@@ -10,17 +10,6 @@ servers:
   - description: Your localhost
     url: http://localhost:8080
 paths:
-  /:
-    get:
-      tags:
-        - Security
-      summary: baseLink to authentify user
-      responses:
-        200:
-          description: you're connected
-          content:
-            text/plain:
-              example: you're connected
   /ping:
     get:
       summary: checks server status
@@ -360,6 +349,9 @@ components:
           type: string
           example: 034 64 297 51
         bookingDate:
+          type: string
+          format: date
+        bookingEndDate:
           type: string
           format: date
         roomCategoryName:

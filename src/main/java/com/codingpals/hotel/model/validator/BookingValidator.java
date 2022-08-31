@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BookingValidator {
   public void accept(Booking booking) {
-    if (!this.hasAvailableRoom(booking)) {
+    if (!this.isValid(booking)) {
       throw new RuntimeException("This Room is already occupied");
     }
   }
@@ -17,7 +17,15 @@ public class BookingValidator {
     bookingList.forEach(this::accept);
   }
 
+  private boolean isValid(Booking booking) {
+    return hasAvailableRoom(booking) && hasValidEndDate(booking);
+  }
+
   private boolean hasAvailableRoom(Booking booking) {
     return booking.getRoom().getStatus() == Room.Status.AVAILABLE;
+  }
+
+  private boolean hasValidEndDate(Booking booking) {
+    return booking.getBookingDate().isBefore(booking.getBookingDateEnd());
   }
 }

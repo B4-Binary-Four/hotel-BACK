@@ -16,6 +16,7 @@ public class BookingMapper {
     return Booking.builder()
         .id(booking.getId())
         .bookingDate(booking.getBookingDate())
+        .bookingDateEnd(booking.getBookingDateEnd())
         .clientName(booking.getClientName())
         .phoneNumber(booking.getPhoneNumber())
         .room(roomService.getById(booking.getRoomId()))
@@ -29,6 +30,7 @@ public class BookingMapper {
         .phoneNumber(createBooking.getPhoneNumber())
         .creationDate(Instant.now())
         .bookingDate(createBooking.getBookingDate())
+        .bookingDateEnd(createBooking.getBookingDateEnd())
         .build();
   }
 
@@ -38,6 +40,7 @@ public class BookingMapper {
         .bookingDate(booking.getBookingDate())
         .phoneNumber(booking.getPhoneNumber())
         .creationDate(booking.getCreationDate())
+        .bookingDateEnd(booking.getBookingDateEnd())
         .clientName(booking.getClientName())
         .roomId(booking.getRoom().getId())
         .roomCategoryName(booking.getRoom().getCategory().getCategoryName())

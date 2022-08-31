@@ -6,9 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
 import javax.validation.constraints.FutureOrPresent;
-import javax.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,6 +27,8 @@ public class Booking {
   private String phoneNumber;
   @FutureOrPresent
   private Instant bookingDate;
+  @FutureOrPresent
+  private Instant bookingDateEnd;
   private Instant creationDate;
   @ManyToOne
   private Room room;

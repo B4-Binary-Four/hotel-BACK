@@ -61,8 +61,8 @@ public class BookingService {
       toUpdate.getRoom().setStatus(Room.Status.AVAILABLE);
       booking.getRoom().setStatus(Room.Status.TAKEN);
     }
-    RoomCategory roomCategory = booking.getRoom().getCategory();
     toUpdate.setBookingDate(booking.getBookingDate());
+    toUpdate.setBookingDateEnd(booking.getBookingDateEnd());
     toUpdate.setPhoneNumber(booking.getPhoneNumber());
     toUpdate.setRoom(booking.getRoom());
     toUpdate.setClientName(booking.getClientName());
