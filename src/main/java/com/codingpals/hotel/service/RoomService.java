@@ -5,6 +5,8 @@ import com.codingpals.hotel.model.PageFromOne;
 import com.codingpals.hotel.model.Room;
 import com.codingpals.hotel.model.validator.RoomValidator;
 import com.codingpals.hotel.repository.RoomRepository;
+
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -24,6 +26,13 @@ public class RoomService {
     Pageable pageable =
         PageRequest.of(page.getValue() - 1, pageSize.getValue(),
             Sort.by(Sort.Direction.ASC, "status"));
+    return roomRepository.findAll(pageable).getContent();
+  }
+
+  public List<Room> getAll(PageFromOne page , BoundedPageSize pageSize , String category , Instant bookingDate){
+    Pageable pageable =
+            PageRequest.of(page.getValue() - 1, pageSize.getValue(),
+                    Sort.by(Sort.Direction.ASC, "status"));
     return roomRepository.findAll(pageable).getContent();
   }
 

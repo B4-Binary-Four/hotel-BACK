@@ -1,16 +1,15 @@
 package com.codingpals.hotel.service;
 
-import com.codingpals.hotel.model.Booking;
-import com.codingpals.hotel.model.BoundedPageSize;
-import com.codingpals.hotel.model.PageFromOne;
-import com.codingpals.hotel.model.Room;
-import com.codingpals.hotel.model.RoomCategory;
+import com.codingpals.hotel.model.*;
 import com.codingpals.hotel.model.validator.BookingValidator;
 import com.codingpals.hotel.repository.BookingRepository;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
+
+import com.codingpals.hotel.security.model.Role;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -20,6 +19,8 @@ import org.springframework.stereotype.Service;
 public class BookingService {
   private final BookingRepository bookingRepository;
   private final BookingValidator bookingValidator;
+
+  private final UserService userService ;
 
   public List<Booking> getBookings(PageFromOne page, BoundedPageSize pageSize,
                                    String roomCategoryName) {
@@ -34,6 +35,12 @@ public class BookingService {
   public Booking saveBooking(Booking booking) {
     bookingValidator.accept(booking);
     booking.getRoom().setStatus(Room.Status.TAKEN);
+    User user = new User() ;
+    user.setUsername(booking.getPhoneNumber());
+    user.setRole(Role.CLIENT);
+    user.setEnabled(true);
+
+    userService.saveUser(user);
     return bookingRepository.save(booking);
   }
 
