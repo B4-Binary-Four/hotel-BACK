@@ -7,22 +7,24 @@ import com.codingpals.hotel.service.RoomCategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.Instant;
+
 @Component
 @AllArgsConstructor
 public class RoomMapper {
   private final RoomCategoryService roomCategoryService;
   private final BookingService bookingService;
 
-  public com.codingpals.hotel.model.rest.Room toRest(Room room) {
+  public com.codingpals.hotel.model.rest.Room toRest(Room room ,Instant instant) {
     return com.codingpals.hotel.model.rest.Room.builder()
-        .id(room.getId())
-        .roomName(room.getName())
-        .description(room.getDescription())
-        .categoryName(room.getCategory().getCategoryName())
-        .price(room.getCategory().getPrice())
-        .bookingCount(bookingService.getRoomBookingCount(room))
-        .status(room.getStatus())
-        .build();
+            .id(room.getId())
+            .roomName(room.getName())
+            .description(room.getDescription())
+            .categoryName(room.getCategory().getCategoryName())
+            .price(room.getCategory().getPrice())
+            .bookingCount(bookingService.getRoomBookingCount(room))
+            .status(bookingService.getStatus(room.getId() , instant))
+            .build();
   }
 
   public Room toDomain(com.codingpals.hotel.model.rest.Room room) {

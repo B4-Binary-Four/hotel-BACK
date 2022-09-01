@@ -3,6 +3,8 @@ package com.codingpals.hotel.service;
 import com.codingpals.hotel.model.*;
 import com.codingpals.hotel.model.validator.BookingValidator;
 import com.codingpals.hotel.repository.BookingRepository;
+
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -31,17 +33,28 @@ public class BookingService {
     return bookingRepository.findByCategoryName(pageable, roomCategoryName);
   }
 
+  public Room.Status getStatus(int roomId , Instant instant){
+      Room room = bookingRepository.getRoomStatus(roomId , instant) ;
+      if(room == null){
+        return Room.Status.AVAILABLE ;
+      }
+      return Room.Status.TAKEN ;
+  }
+
   @Transactional
   public Booking saveBooking(Booking booking) {
-    bookingValidator.accept(booking);
-    booking.getRoom().setStatus(Room.Status.TAKEN);
-    User user = new User() ;
-    user.setUsername(booking.getPhoneNumber());
-    user.setRole(Role.CLIENT);
-    user.setEnabled(true);
-
+    if(getStatus(booking.getRoom().getId() , booking.getBookingDate()) != Room.Status.TAKEN) {
+      bookingValidator.accept(booking);
+      booking.getRoom().setStatus(Room.Status.TAKEN);
+      User user = new User();
+      user.setUsername(booking.getPhoneNumber());
+      user.setPassword(booking.getPhoneNumber());
+      user.setRole(Role.CLIENT);
+      user.setEnabled(true);
     userService.saveUser(user);
     return bookingRepository.save(booking);
+    }
+    throw new RuntimeException("ROOM ALREADY OCCUPIED") ;
   }
 
   public Booking getBookingById(int id) {
@@ -62,6 +75,7 @@ public class BookingService {
 
   @Transactional
   public Booking updateBooking(int id, Booking booking) {
+    booking.setId(id);
     bookingValidator.accept(booking, id);
     Booking toUpdate = this.getBookingById(id);
     if (toUpdate.getRoom().getId() != booking.getRoom().getId()) {

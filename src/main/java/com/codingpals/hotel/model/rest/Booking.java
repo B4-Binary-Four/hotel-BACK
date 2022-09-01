@@ -19,6 +19,6 @@ public class Booking {
   private Instant bookingDate;
   private Instant bookingDateEnd;
   private String roomCategoryName;
-  private int roomId;
+  private String roomName;
   private Instant creationDate;
 }

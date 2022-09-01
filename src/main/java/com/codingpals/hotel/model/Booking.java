@@ -34,3 +34,6 @@ public class Booking {
   @ManyToOne
   private Room room;
 }
+
+//select name from booking inner join room where booking.id = room.id where booking.bookingDate = bookingDate
+//and booking.bookingDateEnd = bookingDateEnd and room.status = availaible

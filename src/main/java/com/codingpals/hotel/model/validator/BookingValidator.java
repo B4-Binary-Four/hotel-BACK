@@ -32,7 +32,7 @@ public class BookingValidator {
   }
 
   private boolean hasAvailableRoom(Booking booking) {
-    return booking.getRoom().getStatus() == Room.Status.AVAILABLE;
+    return booking.getRoom().getStatus() != Room.Status.TAKEN;
   }
 
 

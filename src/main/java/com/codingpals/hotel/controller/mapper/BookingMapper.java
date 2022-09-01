@@ -19,14 +19,14 @@ public class BookingMapper {
         .bookingDateEnd(booking.getBookingDateEnd())
         .clientName(booking.getClientName())
         .phoneNumber(booking.getPhoneNumber())
-        .room(roomService.getById(booking.getRoomId()))
+        .room(roomService.getByName(booking.getRoomName()))
         .build();
   }
 
   public Booking toDomain(CreateBooking createBooking) {
     return Booking.builder()
         .clientName(createBooking.getClientName())
-        .room(roomService.getById(createBooking.getRoomId()))
+        .room(roomService.getByName(createBooking.getRoomName()))
         .phoneNumber(createBooking.getPhoneNumber())
         .creationDate(Instant.now())
         .bookingDate(createBooking.getBookingDate())
@@ -42,7 +42,7 @@ public class BookingMapper {
         .creationDate(booking.getCreationDate())
         .bookingDateEnd(booking.getBookingDateEnd())
         .clientName(booking.getClientName())
-        .roomId(booking.getRoom().getId())
+        .roomName(booking.getRoom().getName())
         .roomCategoryName(booking.getRoom().getCategory().getCategoryName())
         .build();
   }

@@ -22,19 +22,15 @@ public class RoomService {
   private final RoomRepository roomRepository;
   private final RoomValidator roomValidator;
 
-  public List<Room> getAll(PageFromOne page, BoundedPageSize pageSize) {
+  public List<Room> getAll(PageFromOne page, BoundedPageSize pageSize,String category) {
     Pageable pageable =
         PageRequest.of(page.getValue() - 1, pageSize.getValue(),
-            Sort.by(Sort.Direction.ASC, "status"));
-    return roomRepository.findAll(pageable).getContent();
+            Sort.by(Sort.Direction.ASC, "category"));
+    if(category.isBlank())
+      return roomRepository.findAll(pageable).getContent();
+    else return roomRepository.findAllByCategory(category) ;
   }
 
-  public List<Room> getAll(PageFromOne page , BoundedPageSize pageSize , String category , Instant bookingDate){
-    Pageable pageable =
-            PageRequest.of(page.getValue() - 1, pageSize.getValue(),
-                    Sort.by(Sort.Direction.ASC, "status"));
-    return roomRepository.findAll(pageable).getContent();
-  }
 
   @Transactional
   public Room save(Room room) {
@@ -49,7 +45,13 @@ public class RoomService {
     }
     throw new RuntimeException("Room not found");
   }
-
+  public Room getByName(String name){
+    Optional<Room> optRoom = roomRepository.findByName(name);
+    if (optRoom.isPresent()) {
+      return optRoom.get();
+    }
+    throw new RuntimeException("Room not found");
+  }
   @Transactional
   public Room updateRoom(int id, Room room) {
     roomValidator.accept(room);

@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers(HttpMethod.PUT,"/bookings").permitAll()
         .antMatchers(HttpMethod.GET).hasAnyRole(Role.ADMIN.getRole() , Role.CLIENT.getRole())
         .antMatchers(HttpMethod.POST, "/users").hasAnyRole(Role.ADMIN.getRole())
-        .antMatchers(HttpMethod.PUT).authenticated()
+        .antMatchers(HttpMethod.PUT).hasAnyRole(Role.ADMIN.getRole())
         .and()
         .cors()
         .and()

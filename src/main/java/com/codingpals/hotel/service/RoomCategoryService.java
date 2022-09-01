@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,7 +17,7 @@ public class RoomCategoryService {
   private final CategoryValidator categoryValidator;
 
   public List<RoomCategory> getRoomCategories() {
-    return roomCategoryRepository.findAll();
+    return roomCategoryRepository.findAll(Sort.by(Sort.Direction.DESC , "price"));
   }
 
   public RoomCategory getRoomCategoryById(int id) {

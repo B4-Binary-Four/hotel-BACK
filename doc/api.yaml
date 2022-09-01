@@ -109,6 +109,12 @@ paths:
             $ref: '#/components/schemas/PageSize'
           in: query
           required: true
+        - name: instant
+          required: true
+          in: query
+          schema:
+              $ref: '#/components/schemas/Instant'
+
       responses:
         200:
           description: list of room
@@ -147,6 +153,11 @@ paths:
             type: integer
           in: path
           required: true
+        - name: instant
+          required: true
+          in: query
+          schema:
+            $ref: '#/components/schemas/Instant'
       responses:
         200:
           description: room

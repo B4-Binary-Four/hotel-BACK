@@ -26,6 +26,7 @@ public class Room {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
   @Enumerated(EnumType.STRING)
+  @Transient
   private Status status;
   @Column(unique = true)
   private String name;
